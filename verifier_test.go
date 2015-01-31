@@ -15,8 +15,8 @@ func init() {
 }
 
 func TestVerifySHA512(t *testing.T) {
-	key := loadPublicKey("test.pub")
-	data := GetHash("test.bin")
+	key := loadPublicKey("samples/test.pub")
+	data := GetHash("samples/test.bin")
 
 	valid, err := VerifySHA512(key, data, testSigned)
 
@@ -26,7 +26,7 @@ func TestVerifySHA512(t *testing.T) {
 }
 
 func TestSignSHA512(t *testing.T) {
-  key := loadPrivateKey("test.key")
+  key := loadPrivateKey("samples/test.key")
   signed := SignSHA512(key, testHash)
 
   if !reflect.DeepEqual(testSigned, signed) {
@@ -36,13 +36,13 @@ func TestSignSHA512(t *testing.T) {
 
 
 func TestGetHash(t *testing.T) {
-	if !reflect.DeepEqual(GetHash("test.bin"), testHash) {
+	if !reflect.DeepEqual(GetHash("samples/test.bin"), testHash) {
 		t.Errorf("Hash failed.")
 	}
 }
 
 func TestLoadPublicKey(t *testing.T) {
-  key := loadPublicKey("test.pub")
+  key := loadPublicKey("samples/test.pub")
 
   if key == nil {
     t.Errorf("key is nil")
@@ -58,7 +58,7 @@ func TestLoadPublicKeyFileDoesntExist(t *testing.T) {
 }
 
 func TestLoadPublicKeyNotAPublicKey(t *testing.T) {
-  key := loadPublicKey("test.key")
+  key := loadPublicKey("samples/test.key")
 
   if key != nil {
     t.Errorf("key should be nil")
@@ -66,7 +66,7 @@ func TestLoadPublicKeyNotAPublicKey(t *testing.T) {
 }
 
 func TestLoadPublicKeyNotPEMEncoded(t *testing.T) {
-  key := loadPublicKey("test.bin")
+  key := loadPublicKey("samples/test.bin")
 
   if key != nil {
     t.Errorf("key should be nil")
@@ -74,7 +74,7 @@ func TestLoadPublicKeyNotPEMEncoded(t *testing.T) {
 }
 
 func TestLoadPrivateKey(t *testing.T) {
-	key := loadPrivateKey("test.key")
+	key := loadPrivateKey("samples/test.key")
 
 	if key == nil {
 		t.Errorf("key is nil")
@@ -90,7 +90,7 @@ func TestLoadPrivateKeyFileDoesntExist(t *testing.T) {
 }
 
 func TestLoadPrivateKeyNotAPrivateKey(t *testing.T) {
-  key := loadPrivateKey("test.pub")
+  key := loadPrivateKey("samples/test.pub")
 
   if key != nil {
     t.Errorf("key should be nil")
@@ -98,7 +98,7 @@ func TestLoadPrivateKeyNotAPrivateKey(t *testing.T) {
 }
 
 func TestLoadPrivateKeyNotPEMEncoded(t *testing.T) {
-  key := loadPrivateKey("test.bin")
+  key := loadPrivateKey("samples/test.bin")
 
   if key != nil {
     t.Errorf("key should be nil")
